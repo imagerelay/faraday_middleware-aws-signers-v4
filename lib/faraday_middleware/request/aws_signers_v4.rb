@@ -100,11 +100,7 @@ class FaradayMiddleware::AwsSignersV4 < Faraday::Middleware
   end
 
   def sign_request(req, credentials, service_name, region)
-    if defined?(Aws)
-      Aws::Signers::V4.new(credentials, service_name, region).sign(req)
-    else
-      AWS::Core::Signers::Version4.new(credentials, service_name, region).sign_request(req)
-    end
+    AWS::Core::Signers::Version4.new(credentials, service_name, region).sign_request(req)
   end
 
 end
